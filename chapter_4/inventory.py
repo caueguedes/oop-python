@@ -1,0 +1,47 @@
+class InvalidItemType(Exception):
+    pass
+
+
+class OutOfStock(Exception):
+    pass
+
+
+class Inventory:
+    def lock(self, item_type):
+        """Select the type of the item that is going to
+        be manipulated. This method will lock the
+        item so nobody else can manipulate the
+        inventory until it's returned. This prevents
+        selling the same item to two different
+        customers."""
+        pass
+
+    def unlock(self, item_type):
+        """Release the given type so that other
+        customers can access it."""
+        pass
+
+    def purchase(self, item_type):
+        """If the item is not locked, raise an
+        exception. If the item_type does not exists,
+        raise an exception. If the item is currently
+        out of stock, raise an exception. If the item
+        is available, subtract one item and return
+        the number of items left."""
+        pass
+
+
+item_type = "widget"
+inventory = Inventory()
+inventory.lock(item_type)
+
+try:
+    num_left = inventory.purchase(item_type)
+except InvalidItemType:
+    print("Sorry, we don't sell {}".format(item_type))
+except OutOfStock:
+    print("Sorry, that item is out of stock.")
+else:
+    print(f"Purchase complete. There are {num_left} {item_type}s left")
+finally:
+    inventory.unlock(item_type)
