@@ -1,13 +1,18 @@
-class Silly:
-    def _get_silly(self):
+class SillyDecorated:
+
+    @property
+    def silly(self):
+        "   ""This is a silly property"""
         print("You are getting silly")
         return self._silly
 
-    def _set_silly(self, value):
+    @silly.setter
+    def silly(self, value):
         print("Your are making silly {}".format(value))
         self._silly = value
 
-    def _del_silly(self):
+    @silly.deleter
+    def silly(self):
         print("Whoah, you killed silly!")
         del self._silly
 
