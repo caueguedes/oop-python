@@ -7,9 +7,9 @@ class Character:
         self.underline = underline
 
     def __str__(self):
-        bold = "*" if self.bold else ''
-        italic = "/" if self.italic else ''
-        underline = '_' if self.underline else ''
+        bold = "*" if self.bold else ""
+        italic = "/" if self.italic else ""
+        underline = "_" if self.underline else ""
         return bold + italic + underline + self.character
 
 
@@ -19,21 +19,23 @@ class Cursor:
         self.position = 0
 
     def forward(self):
-        self.cursor += 1
+        self.position += 1
 
     def back(self):
-        self.cursor -= 1
+        self.position -= 1
 
     def home(self):
         while self.document.characters[self.position - 1].character != "\n":
             self.position -= 1
             if self.position == 0:
-                # Got to beggining  of file before newline
+                # Got to beginning of file before newline
                 break
 
     def end(self):
-        while (self.position < len(self.document.characters)
-                and self.document.characters[self.position] != "\n"):
+        while (
+            self.position < len(self.document.characters)
+            and self.document.characters[self.position].character != "\n"
+        ):
             self.position += 1
 
 
@@ -41,43 +43,54 @@ class Document:
     def __init__(self):
         self.characters = []
         self.cursor = Cursor(self)
-        self.filename = ''
+        self.filename = ""
 
     def insert(self, character):
-        if not hasattr(character, 'character'):
+        if not hasattr(character, "character"):
             character = Character(character)
+        self.characters.insert(self.cursor.position, character)
+        self.cursor.forward()
 
     def delete(self):
-        del self.characters[self.cursor]
+        del self.characters[self.cursor.position]
 
     def save(self):
-        with open(self.filename, 'w') as f:
-            f.write(''.join(self.characters))
+        with open(self.filename, "w") as f:
+            f.write("".join(self.characters))
 
     @property
     def string(self):
-        "".join((str(c) for c in self.characters))
-
+        return "".join((str(c) for c in self.characters))
 
 
 d = Document()
 
 d.insert('h')
 d.insert('e')
-d.insert('l')
-d.insert('l')
+d.insert(Character('l', bold=True))
+d.insert(Character('l', bold=True))
 d.insert('o')
 d.insert('\n')
-d.insert('w')
-d.insert('o')
-d.insert('r')
+d.insert(Character('w', italic=True))
+d.insert(Character('o', italic=True))
+d.insert(Character('r', underline=True))
 d.insert('l')
 d.insert('d')
-d.cursor.home()
-d.insert("*")
-
-print("".join(d.characters))
-# hello
-# *world
 
 print(d.string)
+# he*l*lo
+# /w/o_rld
+
+d.cursor.home()
+d.delete()
+d.insert('W')
+
+print(d.string)
+# he*l*lo
+# W/o_rld
+
+d.characters[0].underline = True
+
+print(d.string)
+# _he*l*lo
+# W/o_rld
