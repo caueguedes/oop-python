@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections import Counter
 
 
 def letter_frequency(sentence):
@@ -16,6 +17,10 @@ def letter_frequency_default(sentence):
     return frequencies
 
 
+def letter_frequency_counter(sentence):
+    return Counter(sentence)
+
+
 num_items = 0
 
 
@@ -29,3 +34,20 @@ d = defaultdict(tuple_counter)
 d['a'][1].append("hello")
 d['b'][1].append('world')
 d  # defaultdict(<function tuple_counter at 0x82f2c6c>, {'a': (1, ['hello']), 'b': (2, ['world'])})
+
+
+responses = [
+    "vanilla",
+    "chocolate",
+    "vanilla",
+    "vanilla",
+    "caramel",
+    "strawberry",
+    "vanilla"
+]
+
+print(
+    "The children voted for {} ice cream".format(
+        Counter(responses).most_common(1)[0][0]
+    )
+)
