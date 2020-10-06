@@ -1,7 +1,7 @@
 from functools import total_ordering
 from operator import itemgetter
 
-
+    
 @total_ordering
 class WeirdSortee:
     def __init__(self, string, number, sort_num):
