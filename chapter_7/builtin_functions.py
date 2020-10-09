@@ -9,4 +9,15 @@ len([1, 2, 3, 4])  # 4
 
 eval("print('oi')")
 exec("print('oi')")
-compile()
+# compile()
+
+# Manipulate attributes by name
+hasattr()
+getattr()
+setattr()
+delattr()
+
+zip()  # take 2 or more sequences and returns a new sequence
+
+
+dir(__builtins__)  # to see all the available builtin functions
