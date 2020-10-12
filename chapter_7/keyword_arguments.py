@@ -8,8 +8,10 @@ class Options:
     }
 
     def __init__(self, **kwargs):
-        self.options = dict(Options.default_options)
-        self.options.update(kwargs)
+        # kwargs will overwrite the first Options.default_options dict
+        self.options = {**Options.default_options, **kwargs}
+        # self.options = dict(Options.default_options)
+        # self.options.update(kwargs)
 
     def __getitem__(self, item):
         return self.options[item]
