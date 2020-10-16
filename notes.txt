@@ -1,0 +1,4 @@
+# print the sending messages to console despite sending them. DebugginServer
+python -m smtpd -n -c DebuggingServer localhost:1025
+
+

@@ -14,3 +14,19 @@ public class {classname}
 """
 
 print(template)
+
+# f-strings can contain python code
+
+emails = ("a@example.com", "b@example.com")
+message = {
+    "subject": "You Have Mail!",
+    "message": "Here's some mail for you!",
+}
+
+formatted_w_python = f"""
+From: <{emails[0]}>
+To: <{emails[1]}>
+Subject: {message['subject']}
+{message['message']}"""
+
+print(formatted_w_python)
