@@ -5,9 +5,9 @@ some_data = ["a list", "containing", 5,
              ["inner", "list"]]
 
 with open("pickled_list", "wb") as file:
-    pickle.dumps(some_data, file)
+    pickle.dump(some_data, file)
 
-with open("picled_list", "rb") as file:
+with open("pickled_list", "rb") as file:
     loaded_data = pickle.load(file)
 
 print(loaded_data)
