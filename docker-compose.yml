@@ -6,7 +6,10 @@ services:
     ports:
       - "3000:3000"
       - "8000:8000"
+    environment:
+      - DISPLAY=$DISPLAY
     volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
       - .:/usr/src/app
     tty: true
     stdin_open: true
