@@ -10,11 +10,11 @@ class Application(tk.Frame):
         master.columnconfigure(0, weight=1)
         master.rowconfigure(0, weight=1)
         self.create_widgets()
-        self.file = csv.writer(open("colors.csv", "a"))
+        self.file = csv.writer(open("colors.csv"), "a")
 
     def create_color_button(self, label, column, row):
         button = tk.Button(
-        self, command=lambda: self.click_color(label), text=label
+            self, command=lambda: self.click_color(label), text=label
         )
         button.grid(column=column, row=row, sticky="news")
 
@@ -22,6 +22,7 @@ class Application(tk.Frame):
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
+
         return f"#{r:02x}{g:02x}{b:02x}"
 
     def create_widgets(self):
