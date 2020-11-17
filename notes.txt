@@ -2,3 +2,5 @@
 python -m smtpd -n -c DebuggingServer localhost:1025
 
 
+# Check slots for memory save/beyond book material
+__slots__
