@@ -1,0 +1,28 @@
+    Usually abstract classes return a singleton class (depending on the context).
+
+    There are several implementations in python of abstract classes that contain
+a lot less boilerplate code in Python. Often the requirements can be more easily
+fulfilled by using separate module for each factory type, and ensuring that the
+correct module is being accessed.
+
+localize/
+    __init__.py
+    backends/
+        __init__.py
+        USA.py
+        France.py
+        ...
+
+If the backend never change dynamically it could be implemented as:
+
+
+## on : localize.__init__.py ###
+from .backend import USA, France
+
+if contry_code == "US":
+    current_backend = USA
+
+## end: localize.__init__.py
+
+Now you can
+localize.current_backend.format_date
